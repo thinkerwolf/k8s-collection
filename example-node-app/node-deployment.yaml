@@ -1,0 +1,20 @@
+apiVersion: apps/v1 # kubernates api版本号
+kind: Deployment
+metadata: # 元信息：包含name、namesapce、labels等其他关于此POD的信息
+  name: kubia
+spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和其他数据
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubia
+  template:
+    metadata:
+      name: kubia
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: wukaireign/kubia
+          ports:
+            - containerPort: 10887
