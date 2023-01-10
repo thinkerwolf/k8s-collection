@@ -1,11 +1,13 @@
-apiVersion: apps/v1 # kubernates api版本号
+apiVersion: apps/v1
 kind: Deployment
 metadata: # 元信息：包含name、namesapce、labels等其他关于此POD的信息
   name: kubia
+  labels:
+    env: dev
 spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和其他数据
   replicas: 1
   selector:
-    matchLabels:
+    matchLabels: # ！！！通过labels去认定副本数量
       app: kubia
   template:
     metadata:
@@ -15,6 +17,15 @@ spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和
     spec:
       containers:
         - name: kubia
+          livenessProbe: # 容器存活检测 1.httpGet 2.tcpSocket 3.exec command line
+            httpGet:
+              path: /
+              port: 10887
+            initialDelaySeconds: 15 # 一段时间后启动liveless
           image: wukaireign/kubia
+          resources:     # 对容器资源进行限制
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
           ports:
             - containerPort: 10887

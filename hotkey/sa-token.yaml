@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hotkey-default-secret
+  namespace: hotkey
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token

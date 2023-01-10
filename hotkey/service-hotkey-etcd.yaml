@@ -1,0 +1,21 @@
+# K8S Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotkey-etcd
+  namespace: hotkey
+  labels:
+    name: hotkey-etcd
+    env: sit
+spec:
+  selector:
+    app: hotkey-etcd
+  ports:
+    - name: hotkey-etcd-2379
+      protocol: TCP
+      port: 2379 # 可达Service的端口
+      targetPort: 2379 # Service转发到的容器的端口
+    - name: hotkey-etcd-2380
+      protocol: TCP
+      port: 2380 # 可达Service的端口
+      targetPort: 2380 # Service转发到的容器的端口

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hotkey-dashboard
+spec:
+  selector:
+    app: hotkey-dashboard
+  type: NodePort
+  ports:
+    - name: hotkey-dashboard-8081
+      port: 8081
+      targetPort: 8081
+      nodePort: 30001

@@ -1,0 +1,29 @@
+apiVersion: apps/v1 # kubernates api版本号
+kind: ReplicaSet
+metadata: # 元信息：包含name、namesapce、labels等其他关于此POD的信息
+  name: kubia.rs
+  labels:
+    env: dev
+spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和其他数据
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubiars
+    matchExpressions:
+      - { key: app, operator: In, values: [kubiars] }
+  template: # 模板
+    metadata:
+      name: kubiars
+      labels:
+        app: kubiars
+    spec:
+      containers:
+        - name: kubiars
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 10887
+            initialDelaySeconds: 15 # 一段时间后启动liveless
+          image: wukaireign/kubia
+          ports:
+            - containerPort: 10887

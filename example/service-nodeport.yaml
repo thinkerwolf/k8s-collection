@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubia-nodeport
+spec:
+  selector:
+    app: kubia
+  type: NodePort
+  ports:
+    - name: kubia-nodeport-10887
+      port: 10887
+      targetPort: 10887

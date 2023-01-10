@@ -1,7 +1,9 @@
+# K8S Service
 apiVersion: v1
 kind: Service
 metadata:
   name: kubia-http
+  namespace: hotkey
   labels:
     name: kubia-http
     env: dev
@@ -13,6 +15,7 @@ spec:
   selector:
     app: kubia
   ports:
-    - protocol: TCP
-      port: 10887
-      targetPort: 10887
+    - name: kubia-http
+      protocol: TCP
+      port: 10887 # 可达Service的端口
+      targetPort: 10887 # Service转发到的容器的端口

@@ -1,0 +1,21 @@
+apiVersion: apps/v1 # kubernates api版本号
+kind: DaemonSet
+metadata: # 元信息：包含name、namesapce、labels等其他关于此POD的信息
+  name: ssd-monitor
+  labels:
+    env: dev
+spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和其他数据
+  selector:
+    matchLabels:
+      app: ssd-monitor
+  template: # 模板
+    metadata:
+      name: ssd-monitor
+      labels:
+        app: ssd-monitor
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+        - name: main
+          image: luksa/ssd-monitor
