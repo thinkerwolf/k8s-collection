@@ -1,0 +1,52 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: kubia-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kubia
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource # Pod指标资源
+      resource:
+        name: cpu # cpu使用率
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: Resource
+      resource:
+        name: memory # memory使用率
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: ContainerResource # Container指标资源
+      containerResource:
+        name: cpu
+        container: kubia
+        target:
+          type: Utilization
+          averageUtilization: 40
+  behavior:
+    scaleDown:
+      selectPolicy: Disabled # 禁用缩容，下面配置不生效
+      stabilizationWindowSeconds: 300 # 缩容稳定窗口，过去5分钟的所有期望状态都被考虑
+      policies:
+        - periodSeconds: 60 # 允许在一分钟内最多缩容4个副本
+          type: Pods
+          value: 4
+        - periodSeconds: 60 # 允许在一分钟内缩容当前副本数的10%
+          type: Percent
+          value: 10
+    scaleUp:
+      stabilizationWindowSeconds: 0 # 扩容没有稳定窗口
+      selectPolicy: Max
+      policies:
+        - periodSeconds: 15 # 每15s内扩容到期望的100%
+          type: Percent
+          value: 100
+        - periodSeconds: 15 # 每15s内添加4个副本
+          type: Pods
+          value: 4

@@ -1,0 +1,11 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget # 定义对一组Pod造成的最大干扰
+metadata:
+  name: kuba-pdb
+  namespace: default
+spec:
+  maxUnavailable: 1 # 最大不可用pod数
+  minAvailable: 2 # 最小可用pod数
+  selector:
+    matchLabels:
+      app: kubia

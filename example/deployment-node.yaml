@@ -23,7 +23,7 @@ spec: # 规格：包含了一个POD内容的真正描述，例如容器、卷和
               port: 10887
             initialDelaySeconds: 15 # 一段时间后启动liveless
           image: wukaireign/kubia
-          resources:     # 对容器资源进行限制
+          resources: # 对容器资源进行限制
             limits:
               memory: "128Mi"
               cpu: "500m"
