@@ -72,7 +72,7 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: LOG_GROUP_NAME
-              value: "/aws/eks/sit-vod/app-logs"
+              value: "/aws/eks/sit-vod/application"
             - name: AWS_REGION
               value: "us-east-2"
           resources:

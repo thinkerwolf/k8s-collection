@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubia-configmap-file
+  labels:
+    app: myapplication
+data:
+  application.yaml: |
+    # yaml file
+    spring:
+      application:
+        name: kubia
+      profiles:
+        active: dev    
+  fluentd.conf: |
+    # fluentd config  
+    

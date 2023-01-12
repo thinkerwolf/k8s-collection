@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubia-configmap
+  labels:
+    app: kubia
+data:
+  foo: bar
+  port: "10080"

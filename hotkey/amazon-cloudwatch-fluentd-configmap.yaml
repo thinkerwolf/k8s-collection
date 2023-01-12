@@ -1,0 +1,10 @@
+# create configmap for cluster name and aws region for CloudWatch Logs
+# need to replace the placeholders {{cluster_name}} and {{region_name}}
+apiVersion: v1
+data:
+  cluster.name: "sit-vod"
+  logs.region: "us-east-2"
+kind: ConfigMap
+metadata:
+  name: cluster-info
+  namespace: amazon-cloudwatch
