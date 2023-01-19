@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-pv1
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0b18f5ddc86b9c9e8::fsap-0ad83ad6bf18ee570
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-etcd-0
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0b18f5ddc86b9c9e8::fsap-04ffd60ed77d99b5e
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-etcd-1
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0b18f5ddc86b9c9e8::fsap-06ec968788f716436
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: efs-etcd-2
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0b18f5ddc86b9c9e8::fsap-0a46822bd7bf49434
+    parameters:

@@ -1,0 +1,22 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  zone: europe-west1-b
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi # 请求1G存储
+  volumeMode: Filesystem # 卷类型为文件系统
+  accessModes: # 访问模式
+    - ReadWriteOnce # 被一个节点读写
+  storageClassName: "fast" # 动态预分配

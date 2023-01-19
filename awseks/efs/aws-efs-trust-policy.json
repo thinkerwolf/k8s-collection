@@ -1,0 +1,17 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::126026337867:oidc-provider/oidc.eks.us-east-2.amazonaws.com/id/BF2D7E0223BF21F1EF9FCD9A5E530B49"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.eks.us-east-2.amazonaws.com/id/BF2D7E0223BF21F1EF9FCD9A5E530B49:sub": "system:serviceaccount:kube-system:efs-csi-controller-sa"
+                }
+            }
+        }
+    ]
+}
