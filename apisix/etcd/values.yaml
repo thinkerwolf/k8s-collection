@@ -73,7 +73,7 @@ diagnosticMode:
 image:
   registry: public.ecr.aws
   repository: bitnami/etcd
-  tag: 3.4-debian-11
+  tag: 3.5.6-debian-11-r20
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -201,7 +201,7 @@ autoCompactionRetention: ""
 ## - 'new': when installing the chart ('helm install ...')
 ## - 'existing': when upgrading the chart ('helm upgrade ...')
 ##
-initialClusterState: ""
+initialClusterState: "new"
 ## @param maxProcs Limits the number of operating system threads that can execute user-level
 ## Go code simultaneously by setting GOMAXPROCS environment variable
 ## ref: https://golang.org/pkg/runtime
@@ -470,7 +470,7 @@ topologySpreadConstraints: []
 ## @param persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
 ## @param persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
 persistentVolumeClaimRetentionPolicy:
-  enabled: false
+  enabled: true
   whenScaled: Retain
   whenDeleted: Retain
 ## @section Traffic exposure parameters
@@ -577,7 +577,6 @@ persistence:
   ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector
   ##
   selector: {}
-
 
 ## @section Volume Permissions parameters
 ##
@@ -869,3 +868,7 @@ pdb:
   ## @param pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
   ##
   maxUnavailable: ""
+
+
+########  备注  ########
+## 内部通信地址：http://etcd-0.etcd-headless.default:2379;http://etcd-1.etcd-headless.default:2379;http://etcd-2.etcd-headless.default:2379

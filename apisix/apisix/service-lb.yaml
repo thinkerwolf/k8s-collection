@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: apisix-gateway-lb
+  namespace: ingress-apisix
+  labels:
+    app.kubernetes.io/service: apisix-gateway-lb
+spec:
+  selector:
+    app.kubernetes.io/instance: apisix
+    app.kubernetes.io/name: apisix
+  type: LoadBalancer
+  ports:
+    - name: apisix-http
+      port: 80
+      targetPort: 9080
+    - name: apisix-https
+      port: 443
+      targetPort: 9443

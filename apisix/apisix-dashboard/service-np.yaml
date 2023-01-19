@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: apisix-dashboard-np
+  namespace: ingress-apisix
+  labels:
+    app.kubernetes.io/service: apisix-dashboard-np
+spec:
+  selector:
+    app.kubernetes.io/instance: apisix-dashboard
+    app.kubernetes.io/name: apisix-dashboard
+  type: NodePort
+  ports:
+    - name: apisix-dashboard-http
+      port: 9000
+      targetPort: 9000
